@@ -22,7 +22,7 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   const contactsList = await listContacts();
-  await res.json({
+  await res.status(200).json({
     status: "success",
     code: 200,
     data: contactsList,
@@ -33,13 +33,13 @@ router.get("/:contactId", async (req, res, next) => {
   const contactId = req.params.contactId;
   const reqContact = await getContactById(contactId);
   if (!reqContact) {
-    res.json({
+    res.status(404).json({
       status: "Error",
       code: 404,
       message: "Not found",
     });
   } else {
-    res.json({
+    res.status(200).json({
       status: "success",
       code: 200,
       data: reqContact,
@@ -51,13 +51,13 @@ router.post("/", async (req, res, next) => {
   try {
     const value = await schema.validateAsync(req.body);
     const addedContact = await addContact(value);
-    res.json({
+    res.status(201).json({
       status: "success",
       code: 201,
       data: addedContact,
     });
   } catch (err) {
-    res.json({
+    res.status(400).json({
       status: "Error",
       code: 400,
       message: err.details,
@@ -69,9 +69,11 @@ router.delete("/:contactId", async (req, res, next) => {
   const contactId = req.params.contactId;
   const removedContact = await removeContact(contactId);
   if (removedContact) {
-    res.json({ status: "success", code: 200, message: "contact deleted" });
+    res
+      .status(200)
+      .json({ status: "success", code: 200, message: "contact deleted" });
   } else {
-    res.json({ status: "Error", code: 404, message: "Not found" });
+    res.status(404).json({ status: "Error", code: 404, message: "Not found" });
   }
 });
 
@@ -82,20 +84,20 @@ router.put("/:contactId", async (req, res, next) => {
     const value = await schema.validateAsync(req.body);
     const updatedContact = await updateContact(contactId, value);
     if (updatedContact) {
-      res.json({
+      res.status(201).json({
         status: "success",
         code: 201,
         data: updatedContact,
       });
     } else {
-      res.json({
+      res.status(404).json({
         status: "error",
         code: 404,
         message: "Not found",
       });
     }
   } catch (err) {
-    res.json({
+    res.status(400).json({
       status: "Error",
       code: 400,
       message: err.details,
