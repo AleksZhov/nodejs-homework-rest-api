@@ -3,6 +3,7 @@ const getContactById = require("./getContactById.js");
 const addContact = require("./addContact");
 const deleteContact = require("./deleteContact");
 const updateContact = require("./updateContact");
+const updateFavorite = require("./updateFavorite.js");
 
 module.exports = {
   listContacts,
@@ -10,4 +11,5 @@ module.exports = {
   addContact,
   deleteContact,
   updateContact,
+  updateFavorite,
 };
