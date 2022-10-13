@@ -1,10 +1,3 @@
-// const messages = {
-//   400: "Bad request",
-//   401: "Unauthorized",
-//   403: "Forbidden",
-//   404: "Not Found",
-//   409: "Conflict",
-// };
 
 const RequestError = (status, message) => {
   const error = new Error(message);
@@ -12,4 +5,4 @@ const RequestError = (status, message) => {
   return error;
 };
 
-module.exports = { RequestError };
+module.exports = RequestError ;
