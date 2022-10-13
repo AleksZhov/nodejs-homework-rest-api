@@ -1,17 +1,12 @@
-const { RequestError } = require("../../helpers/RequestError.js");
-const { favoriteSchema } = require("../../schemas/contacts.js");
-const { Product } = require("../../models");
+const { RequestError } = require("../../helpers");
+
+const { Contact } = require("../../models");
 
 const updateFavorite = async (req, res) => {
   const contactId = req.params.contactId;
   const { favorite } = req.body;
 
-  const { error } = favoriteSchema.validate(req.body);
-  if (error) {
-    throw RequestError(400, error.message);
-  }
-
-  const updatedContact = await Product.findByIdAndUpdate(
+  const updatedContact = await Contact.findByIdAndUpdate(
     contactId,
     { favorite },
     {

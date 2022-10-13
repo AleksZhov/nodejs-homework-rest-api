@@ -1,9 +1,9 @@
-const { RequestError } = require("../../helpers/RequestError.js");
-const { Product } = require("../../models");
+const { RequestError } = require("../../helpers");
+const { Contact } = require("../../models");
 
 const toGetContactById = async (req, res) => {
   const contactId = req.params.contactId;
-  const reqContact = await Product.findById(contactId);
+  const reqContact = await Contact.findById(contactId);
   if (!reqContact) {
     throw RequestError(404, "Not found");
   } else {
