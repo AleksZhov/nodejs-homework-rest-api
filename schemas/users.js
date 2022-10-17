@@ -16,7 +16,8 @@ const loginSchema = Joi.object({
     .min(3)
     .required(),
   password: Joi.string().min(3).required(),
-  subscription: Joi.string(),
+    subscription: Joi.string(),
+  avatarURL:Joi.string(),
   token: Joi.string(),
 });
 
