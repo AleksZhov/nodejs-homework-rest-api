@@ -6,7 +6,6 @@ const addUser = async (req, res, next) => {
  
   const { email, password } = req.body;
   const hashPassword = bcryptjs.hashSync(password, bcryptjs.genSaltSync(10));
-  console.log(hashPassword);
 
   const requestedUser = await User.find({ email });
   if (requestedUser.length > 0) {
