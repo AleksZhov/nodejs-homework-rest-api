@@ -10,7 +10,7 @@ const auth = async (req, res, next) => {
 
   try {
     if (bearer !== "Bearer") {
-      throw RequestError(401, "Not autharized");
+      throw RequestError(401, "Not authorized");
     }
     const { id } = jwt.verify(token, SECRET_KEY);
     const user = await User.findById(id);
