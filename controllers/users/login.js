@@ -14,6 +14,9 @@ const login = async (req, res) => {
   if (!requestedUser) {
     throw RequestError(401, "Email or password is wrong");
   }
+  if (!requestedUser.verify) {
+    throw RequestError(400, "User was not verified via email");
+  }
 
   const result = bcryptjs.compareSync(password, requestedUser.password);
   if (!result) {
