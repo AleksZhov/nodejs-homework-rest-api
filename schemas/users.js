@@ -16,13 +16,24 @@ const loginSchema = Joi.object({
     .min(3)
     .required(),
   password: Joi.string().min(3).required(),
-    subscription: Joi.string(),
-  avatarURL:Joi.string(),
+  subscription: Joi.string(),
+  avatarURL: Joi.string(),
   token: Joi.string(),
 });
 
 const changeSubscrSchema = Joi.object({
   subscription: Joi.string().valid("starter", "pro", "business"),
 });
+const repeatedVerifySchema = Joi.object({
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .min(3)
+    .required(),
+});
 
-module.exports = { addSchema, loginSchema, changeSubscrSchema };
+module.exports = {
+  addSchema,
+  loginSchema,
+  changeSubscrSchema,
+  repeatedVerifySchema,
+};

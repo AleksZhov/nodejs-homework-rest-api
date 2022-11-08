@@ -6,6 +6,7 @@ const {
   addSchema,
   loginSchema,
   changeSubscrSchema,
+  repeatedVerifySchema,
 } = require("../../schemas/users");
 
 const router = express.Router();
@@ -25,5 +26,11 @@ router.patch(
   auth,
   validateBody(changeSubscrSchema),
   ctrlWrapper(ctrl.changeSubscription)
+);
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+router.post(
+  "/verify",
+  validateBody(repeatedVerifySchema),
+  ctrlWrapper(ctrl.repeatedVerify)
 );
 module.exports = router;
